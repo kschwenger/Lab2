@@ -17,12 +17,14 @@ gpio.setup(in2, gpio.IN, pull_up_down=gpio.PUD_DOWN)
 
 def myCallback(channel):
   print("Rising edge detected on pin %d" % channel)
-
-gpio.add_event_detect(in1, gpio.RISING, callback=myCallback, bouncetime=100)
-
-gpio.wait_for_edge(in2, gpio.FALLING)
-print("Falling edge detected on port", str(in2))
-
+try:
+  while True:
+    gpio.add_event_detect(in1, gpio.RISING, callback=myCallback, bouncetime=100)
+    
+    gpio.wait_for_edge(in2, gpio.FALLING)
+    print("Falling edge detected on port", str(in2))
+except KeyboardfInterrupt:
+  print('nExiting')
 gpio.cleanup()
 
 
