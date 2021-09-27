@@ -5,6 +5,31 @@
 – LED #3 continually blinks on/off at 1 Hz, independent other actions.
 – Use exception handling to exit elegantly on ctrl-C by cleaning up the GPIO ports."""
 
+
+# for callback test
+impot RPi.GPIO as gpio
+
+in1, in2 = 5, 6
+
+gpio.setmode(gpio.BCM)
+gpio.setup(in1, gpio.IN, pull_up_down=gpio.PUD_DOWN)
+gpio.setup(in2, gpio.IN, pull_up_down=gpio.PUD_DOWN)
+
+def myCallback(channel):
+  print("Rising edge detected on pin %d" % channel)
+
+gpio.add_event_detect(in1, gpio.RISING, callback=myCallback, bouncetime=100)
+
+gpio.wait_for_edge(in2, gpio.FALLING)
+print("Falling edge detected on port", str(in2))
+
+gpio.cleanup()
+
+
+
+
+
+"""
 # for triangles (LEDs 1 and 2)
 import RPi.GPIO as GPIO
 from time import sleep
@@ -25,7 +50,7 @@ except KeyboardInterrupt: # stop gracefully on ctrl-C
 
 pwm.stop()
 GPIO.cleanup()
-
+"""
 
 
 
