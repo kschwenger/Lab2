@@ -13,13 +13,16 @@ GPIO.setmode(GPIO.BCM)
 p = 4
 GPIO.setup(p, GPIO.OUT)
 
-pwm = GPIO.PWM(p, 100) # create PWM object @ 100 Hz
+pwm = GPIO.PWM(p, 1) # create PWM object @ 1 Hz
 try:
   pwm.start(0) # initiate PWM at 0% duty cycle
   while 1:
     for dc in range(101): # loop duty cycle from 0 to 100
       pwm.ChangeDutyCycle(dc) # set duty cycle
       sleep(0.01) # sleep 10 ms
+    for dc in range(101,0):
+      pwm.ChangeDutyCycle(dc)
+      sleep(0.01)
 except KeyboardInterrupt: # stop gracefully on ctrl-C
   print('\nExiting')
 
