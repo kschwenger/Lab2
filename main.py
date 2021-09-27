@@ -13,7 +13,7 @@ GPIO.setmode(GPIO.BCM)
 p = 4
 GPIO.setup(p, GPIO.OUT)
 
-pwm = GPIO.PWM(p, 1) # create PWM object @ 1 Hz
+pwm = GPIO.PWM(p, 100) # create PWM object @ 100 Hz
 try:
   pwm.start(0) # initiate PWM at 0% duty cycle
   while 1:
