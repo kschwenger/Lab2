@@ -15,7 +15,7 @@ GPIO.setup(p, GPIO.OUT)
 
 pwm = GPIO.PWM(p, 100) # create PWM object @ 100 Hz
 try:
-  pwm.start(0) # initiate PWM at 0% duty cycle
+  pwm.start(100) # initiate PWM at 0% duty cycle
   while 1:
     for dc in range(100,0): # loop duty cycle from 0 to 100
       pwm.ChangeDutyCycle(dc) # set duty cycle
