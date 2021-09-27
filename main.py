@@ -35,6 +35,7 @@ GPIO.cleanup()
 
 
 # for LED 3
+"""
 import RPi.GPIO as GPIO
 from time import sleep
 
@@ -54,3 +55,4 @@ except Exception as e: # catch all other errors
   print('\ne')
 
 GPIO.cleanup() # clean up GPIO ports
+"""
