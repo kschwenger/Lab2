@@ -7,7 +7,7 @@
 
 
 # for callback test
-impot RPi.GPIO as gpio
+import RPi.GPIO as gpio
 
 in1, in2 = 5, 6
 
