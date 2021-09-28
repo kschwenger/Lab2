@@ -15,9 +15,9 @@ led1, led2, led3 = 4, 17, 27
 gpio.setmode(gpio.BCM)
 gpio.setup(in1, gpio.IN, pull_up_down=gpio.PUD_DOWN)
 gpio.setup(in2, gpio.IN, pull_up_down=gpio.PUD_DOWN)
-gpio.setup(led1, gpio.out)
-gpio.setup(led2, gpio.out)
-gpio.setup(led3, gpio.out)
+gpio.setup(led1, gpio.OUT)
+gpio.setup(led2, gpio.OUT)
+gpio.setup(led3, gpio.OUT)
 # Define a threaded callback function:
 def myCallback1(channel):
   gpio.output(led1, 1)
