@@ -6,25 +6,28 @@
 – Use exception handling to exit elegantly on ctrl-C by cleaning up the GPIO ports."""
 
 
-# for callback test
+# for callback 
 import RPi.GPIO as gpio
-
-in1, in2 = 5, 6
+# Define input/output port numbers:
+in1, in2 = 20, 21
+led1, led2, led3 = 4, 17, 27
 
 gpio.setmode(gpio.BCM)
 gpio.setup(in1, gpio.IN, pull_up_down=gpio.PUD_DOWN)
 gpio.setup(in2, gpio.IN, pull_up_down=gpio.PUD_DOWN)
+gpio.setup(led1, gpio.out)
+gpio.setup(led2, gpio.out)
+gpio.setup(led3, gpio.out)
+# Define a threaded callback function:
+def myCallback1(channel):
+  gpio.output(led1, 1)
+def myCallback2(channel):
+  gpio.output(led2, 1)
 
-def myCallback(channel):
-  print("Rising edge detected on pin %d" % channel)
-try:
-  while True:
-    gpio.add_event_detect(in1, gpio.RISING, callback=myCallback, bouncetime=100)
-    
-    gpio.wait_for_edge(in2, gpio.FALLING)
-    print("Falling edge detected on port", str(in2))
-except KeyboardfInterrupt:
-  print('nExiting')
+# Execute myCallback() if port 1 goes HIGH:
+gpio.add_event_detect(in1, gpio.RISING, callback=myCallback1, bouncetime=100)
+gpio.add_event_detect(in2, gpio.RISING, callback=myCallback2, bouncetime=100)
+
 gpio.cleanup()
 
 
